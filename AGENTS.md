@@ -18,10 +18,11 @@
 
 ## 构建与验证
 
-- 启动开发环境：`npm run dev`
-- 执行类型检查和生产构建：`npm run build`
-- 运行测试：`npm test -- --run`
-- 生成覆盖率报告：`npm run test:coverage`
+- 使用 pnpm 作为唯一包管理器；依赖安装使用 `pnpm install --frozen-lockfile`。
+- 启动开发环境：`pnpm run dev`
+- 执行类型检查和生产构建：`pnpm run build`
+- 运行测试：`pnpm test -- --run`
+- 生成覆盖率报告：`pnpm run test:coverage`
 - 覆盖率要求为 lines、functions、branches、statements 均不低于 98%。
 - 修改 Rust/Tauri 相关代码时，按改动范围补充对应的 Tauri 检查。
 
