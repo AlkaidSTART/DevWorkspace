@@ -39,4 +39,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
           fail_ci_if_error: true
-          slug: AlkaidSTART/DevWorkspace-
+          slug: AlkaidSTART/DevWorkspace
