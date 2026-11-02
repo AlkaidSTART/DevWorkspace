@@ -33,6 +33,36 @@ jobs:
       - name: Run tests with coverage
         run: pnpm run test:coverage
 
+      - name: Add coverage summary
+        run: |
+          node <<'NODE'
+          const fs = require("node:fs");
+          const summary = JSON.parse(
+            fs.readFileSync("coverage/coverage-summary.json", "utf8"),
+          ).total;
+
+          const rows = [
+            ["Statements", summary.statements],
+            ["Branches", summary.branches],
+            ["Functions", summary.functions],
+            ["Lines", summary.lines],
+          ];
+
+          const markdown = [
+            "## Test coverage",
+            "",
+            "| Metric | Coverage | Covered | Total |",
+            "| --- | ---: | ---: | ---: |",
+            ...rows.map(
+              ([name, metric]) =>
+                `| ${name} | ${metric.pct}% | ${metric.covered} | ${metric.total} |`,
+            ),
+            "",
+          ].join("\n");
+
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, markdown);
+          NODE
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
